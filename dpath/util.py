@@ -212,7 +212,7 @@ def search(obj, glob, yielded=False, separator='/', afilter=None, dirs=True):
             return False
 
         matched = dpath.segments.match(segments, globlist)
-        selected = afilter and afilter(found)
+        selected = afilter and (afilter(found) or any(afilter(key) for key in segments))
 
         return (matched and not afilter) or (matched and selected)
 
